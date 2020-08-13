@@ -15,7 +15,6 @@ E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.AssemblyInfo.cs
 E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.RazorTargetAssemblyInfo.cache
 E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.dll
 E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.pdb
-E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.MvcApplicationPartsAssemblyInfo.cache
 E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
 E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
@@ -90,3 +89,13 @@ E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspa
 E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.csproj.CopyComplete
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\DnsClient.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\SharpCompress.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
+E:\turbo-disco\PasteIt\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
+E:\turbo-disco\PasteIt\obj\Debug\netcoreapp3.1\PasteIt.MvcApplicationPartsAssemblyInfo.cache

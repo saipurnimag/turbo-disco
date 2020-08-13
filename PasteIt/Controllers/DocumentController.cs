@@ -34,7 +34,7 @@ namespace PasteIt.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public Document Post([FromBody]Document value)
+        public async Task<Object> PostAsync([FromBody]Document value)
         {
             //generate a 6 digit code which is already not present in Mongo
             String code = generateId();
@@ -45,22 +45,42 @@ namespace PasteIt.Controllers
             newDocument.Title = value.Title;
             newDocument.TimeSavedAt = DateTime.Now;
             newDocument.DeleteIn = value.DeleteIn;
-            return newDocument;
+            newDocument.Content = value.Content;
+            bool result = storeInDatabase(newDocument);
+            if(result)
+            {
+                return newDocument;
+            }
+            FailureMessage obj = new FailureMessage("Sorry couldn't save your meassge. Please try again");
+            return obj;
+        }
+
+        private bool storeInDatabase(Document newDocument)
+        {
+            
+            Program.collection.InsertOne(newDocument);
+           return true;
+           
         }
 
         private String generateId()
         {
             String code = "";
             StringBuilder stringbuilder = new StringBuilder(code);
-            
-            for (int i = 0; i < 6; ++i)
+            try
             {
-                int idx = Program.randomNum.Next(0, Program.characters.Length);
-
-                Console.Write(Program.characters[idx]);
-                code += Program.characters[idx] + "";
+                for (int i = 0; i < 6; ++i)
+                {
+                    int a = 0;
+                    int b = Program.characters.Length;
+                    int idx = Program.randomNum.Next(a, b);
+                    code += Program.characters[idx] + "";
+                }
             }
-            
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
             return code;
         }
 
@@ -76,5 +96,14 @@ namespace PasteIt.Controllers
         public void Delete(int id)
         {
         }
+    }
+}
+
+public class FailureMessage
+{
+    public String message;
+    public FailureMessage(String msg)
+    {
+        message = msg;
     }
 }
