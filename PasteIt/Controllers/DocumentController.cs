@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using PasteIt.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,22 +16,20 @@ namespace PasteIt.Controllers
     [Route("api/[controller]")]
     public class DocumentController : Controller
     {
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET: api/<controller>/{code}
+        [HttpGet("{code}")]
+        public Object Get(String code)
         {
-            return new string[] { "value1", "value2" };
+            var filter = Builders<Object>.Filter.Eq("Code", code);
+            Document document = (Document)Program.collection.Find<Object>(filter).FirstOrDefault();
+            if (document == null)
+            {
+                string[] s = { "No such url found. I think your code has expired" };
+                return s;
+            }
+            return document;
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public String Get(int id)
-        {
-            String code = generateId();
-            Console.WriteLine("returning "+ code);
-            
-            return code;
-        }
 
         // POST api/<controller>
         [HttpPost]
@@ -44,7 +43,27 @@ namespace PasteIt.Controllers
             newDocument.Syntax = value.Syntax;
             newDocument.Title = value.Title;
             newDocument.TimeSavedAt = DateTime.Now;
-            newDocument.DeleteIn = value.DeleteIn;
+            
+            switch (value.DeleteIn)
+            {
+                case ExpireIn.ONE_DAY:
+                    newDocument.expireAt = DateTime.Now.AddDays(1);
+                    break;
+                case ExpireIn.ONE_WEEK:
+                    newDocument.expireAt = DateTime.Now.AddDays(7);
+                    break;
+                case ExpireIn.ONE_MONTH:
+                    newDocument.expireAt = DateTime.Now.AddMonths(1);
+                    break;
+                case ExpireIn.ONE_YEAR:
+                    newDocument.expireAt = DateTime.Now.AddYears(1);
+                    break;
+                case ExpireIn.CUSTOM:
+                    break;
+                default:
+                    break;
+            }
+            
             newDocument.Content = value.Content;
             bool result = storeInDatabase(newDocument);
             if(result)
@@ -58,7 +77,7 @@ namespace PasteIt.Controllers
         private bool storeInDatabase(Document newDocument)
         {
             
-            Program.collection.InsertOne(newDocument);
+           Program.collection.InsertOne(newDocument);
            return true;
            
         }
@@ -82,19 +101,6 @@ namespace PasteIt.Controllers
                 return e.ToString();
             }
             return code;
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Document form)
-        {
-
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

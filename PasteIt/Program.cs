@@ -17,7 +17,7 @@ namespace PasteIt
         public static MongoClient mongoClient = new MongoClient();
         public static IMongoDatabase database = mongoClient.GetDatabase("PasteItDB");
         public static IMongoCollection<Object> collection = database.GetCollection<Object>("DocumentCollection");
-
+        
         public static void Main(string[] args)
         {            
             CreateHostBuilder(args).Build().Run();
